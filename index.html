@@ -5,172 +5,175 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mohamed Abdelnaser | Mechanical Design Engineer</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/jpeg" href="me.jpeg">
 <style>
   :root {
     --black: #080808; --black2: #111111; --black3: #1a1a1a;
     --orange: #8A99A6; --orange-dim: #6B7A87; --orange-glow: rgba(138, 153, 166, 0.18);
     --white: #f0ece4; --gray: #888; --gray2: #555;
     --border: rgba(138, 153, 166, 0.15); --nav-bg: rgba(8, 8, 8, 0.85);
-    --mobile-menu-bg: rgba(8, 8, 8, 0.97); --modal-bg: rgba(8, 8, 8, 0.98);
+    /* Fade variables for Dark Mode */
+    --fade-0: rgba(17, 17, 17, 0); 
+    --fade-100: rgba(17, 17, 17, 1);
+    --text-shadow-val: 0 2px 4px rgba(0,0,0,0.8);
   }
-  body.light-mode { --black: #f9f9f9; --black2: #eeeeee; --black3: #dddddd; --white: #080808; --gray: #555555; --gray2: #333333; --nav-bg: rgba(249, 249, 249, 0.85); --mobile-menu-bg: rgba(249, 249, 249, 0.97); --modal-bg: rgba(249, 249, 249, 0.98); }
+  body.light-mode { 
+    --black: #f9f9f9; --black2: #eeeeee; --black3: #dddddd; 
+    --white: #080808; --gray: #555555; --gray2: #333333; 
+    --nav-bg: rgba(249, 249, 249, 0.85); 
+    /* Fade variables for Light Mode */
+    --fade-0: rgba(238, 238, 238, 0); 
+    --fade-100: rgba(238, 238, 238, 1);
+    --text-shadow-val: none;
+  }
+  
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
-  body { background: var(--black); color: var(--white); font-family: 'Outfit', sans-serif; overflow-x: hidden; transition: background 0.3s, color 0.3s; }
+  body { background: var(--black); color: var(--white); font-family: 'Outfit', sans-serif; overflow-x: hidden; transition: 0.3s; }
 
-  /* Navigation */
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track { background: var(--black2); }
+  ::-webkit-scrollbar-thumb { background: var(--orange-dim); border-radius: 10px; border: 2px solid var(--black2); }
+  ::-webkit-scrollbar-thumb:hover { background: var(--orange); }
+
+  /* Nav */
   nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 4rem; background: var(--nav-bg); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
   .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; color: var(--white); text-decoration: none; }
   .nav-logo span { color: var(--orange); }
   .nav-links { display: flex; gap: 2.5rem; list-style: none; }
   .nav-links a { text-decoration: none; color: var(--gray); font-size: 0.8rem; text-transform: uppercase; }
-  
   .nav-controls { display: flex; align-items: center; gap: 1.5rem; }
-  .theme-btn { background: none; border: none; font-size: 1.2rem; cursor: pointer; color: var(--white); transition: transform 0.3s; }
-  .theme-btn:hover { transform: scale(1.1); }
-  
-  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
-  .hamburger span { display: block; width: 24px; height: 2px; background: var(--white); transition: all 0.3s; }
-  .mobile-menu { display: none; position: fixed; top: 64px; left: 0; right: 0; background: var(--mobile-menu-bg); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 1.5rem 2rem; z-index: 99; flex-direction: column; gap: 1.5rem; transition: background 0.3s; }
+  .theme-btn { background: none; border: none; font-size: 1.2rem; cursor: pointer; color: var(--white); }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; }
+  .hamburger span { display: block; width: 24px; height: 2px; background: var(--white); }
+  .mobile-menu { display: none; position: fixed; top: 64px; left: 0; right: 0; background: var(--nav-bg); padding: 1.5rem 2rem; z-index: 99; flex-direction: column; gap: 1.5rem; }
   .mobile-menu.open { display: flex; }
-  .mobile-menu a { text-decoration: none; color: var(--gray); font-size: 1rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.3s; }
+  .mobile-menu a { text-decoration: none; color: var(--gray); font-size: 1rem; text-transform: uppercase; }
 
   /* Hero */
-  .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 8rem 4rem 4rem; position: relative; overflow: hidden; }
+  .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 8rem 4rem 4rem; position: relative; }
   .hero-bg-grid { position: absolute; inset: 0; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 60px 60px; opacity: 0.5; }
   .hero-layout { display: flex; align-items: center; justify-content: space-between; gap: 4rem; width: 100%; max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
   .hero-content { flex: 1.2; }
-  .hero-image-wrapper { flex: 0.8; display: flex; justify-content: flex-end; align-items: center; }
-  .hero-img { max-width: 100%; width: 280px; aspect-ratio: 4/5; object-fit: cover; border-radius: 16px; box-shadow: 20px 20px 0px var(--border); transform: perspective(1000px) rotateY(-10deg) translateY(0); transition: 0.5s ease; border: 1px solid var(--border); }
-  .hero-img:hover { transform: perspective(1000px) rotateY(0deg) translateY(-10px); box-shadow: 25px 25px 0px var(--orange-dim); }
-
-  .hero-tag { font-size: 0.75rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--orange); font-weight: 600; margin-bottom: 1.2rem; opacity: 0; animation: fadeUp 0.8s forwards 0.2s; }
-  .hero-name { font-family: 'Bebas Neue', sans-serif; font-size: clamp(4rem, 8vw, 8.5rem); line-height: 0.92; letter-spacing: 0.02em; opacity: 0; animation: fadeUp 0.8s forwards 0.4s; }
+  .hero-img { width: 280px; aspect-ratio: 4/5; object-fit: cover; border-radius: 16px; box-shadow: 20px 20px 0px var(--border); transform: rotateY(-10deg); border: 1px solid var(--border); transition: 0.5s; }
+  .hero-img:hover { transform: rotateY(0deg) translateY(-10px); box-shadow: 25px 25px 0px var(--orange-dim); }
+  .hero-tag { font-size: 0.75rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--orange); font-weight: 600; margin-bottom: 1.2rem; }
+  .hero-name { font-family: 'Bebas Neue', sans-serif; font-size: clamp(4rem, 8vw, 8.5rem); line-height: 0.92; }
   .hero-name span { color: var(--orange); }
   .hero-name .outline { -webkit-text-stroke: 1px var(--gray); color: transparent; }
-  .hero-sub { margin-top: 1.5rem; font-size: clamp(1rem, 2vw, 1.15rem); color: var(--gray); font-weight: 300; max-width: 600px; line-height: 1.6; opacity: 0; animation: fadeUp 0.8s forwards 0.6s; }
-  .hero-scroll { position: absolute; bottom: 2.5rem; left: 4rem; display: flex; align-items: center; gap: 0.8rem; color: var(--gray2); font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0; animation: fadeUp 0.8s forwards 1.2s; }
-  .hero-scroll::before { content: ''; display: block; width: 40px; height: 1px; background: var(--gray2); }
+  .hero-sub { margin-top: 1.5rem; font-size: 1.1rem; color: var(--gray); max-width: 600px; line-height: 1.6; }
+  .hero-cta { margin-top: 3rem; display: flex; gap: 1.2rem; }
+  .btn-primary { padding: 0.9rem 2.4rem; background: var(--orange); color: #fff; font-weight: 700; font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px)); }
 
-  /* Section Common */
+  /* Sections */
   section { padding: 6rem 4rem; max-width: 1200px; margin: 0 auto; }
   .section-label { display: flex; align-items: center; gap: 1rem; font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--orange); font-weight: 600; margin-bottom: 1rem; }
   .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); max-width: 80px; }
-  .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 5vw, 4rem); letter-spacing: 0.05em; line-height: 1; margin-bottom: 3.5rem; }
+  .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 5vw, 4rem); letter-spacing: 0.05em; margin-bottom: 3.5rem; line-height: 1; }
 
   /* About */
-  #about { border-top: 1px solid var(--border); }
-  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
-  .about-text { font-size: 1.05rem; color: var(--gray); line-height: 1.9; font-weight: 300; }
-  .about-text strong { color: var(--white); font-weight: 600; }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+  .about-text { font-size: 1.05rem; color: var(--gray); line-height: 1.9; }
+  .about-text strong { color: var(--white); }
   .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); }
-  .stat-item { background: var(--black2); padding: 2rem; position: relative; overflow: hidden; transition: background 0.3s; }
-  .stat-item:hover { background: var(--black3); }
-  .stat-item::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 0; background: var(--orange); transition: height 0.4s; }
-  .stat-item:hover::before { height: 100%; }
+  .stat-item { background: var(--black2); padding: 2rem; position: relative; overflow: hidden; }
   .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 3rem; color: var(--orange); line-height: 1; }
   .stat-label { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray); margin-top: 0.4rem; }
 
-  /* Experience */
-  #experience { border-top: 1px solid var(--border); }
+  /* FADED BACKGROUND STYLE FOR CARDS (Works perfectly in Dark & Light modes) */
+  .card-faded-bg { 
+    position: relative; margin-bottom: 2.5rem; padding: 2.5rem 3rem; 
+    background: var(--black2); border: 1px solid var(--border); 
+    border-left: 3px solid transparent; overflow: hidden; cursor: pointer; transition: 0.3s ease; 
+    display: flex; flex-direction: column; justify-content: center; min-height: 250px;
+  }
+  .card-faded-bg:hover { border-left-color: var(--orange); transform: translateX(6px); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+  
+  .bg-layer { position: absolute; inset: 0; z-index: 1; overflow: hidden; }
+  .bg-layer img { width: 100%; height: 100%; object-fit: cover; object-position: right center; transition: 0.8s ease; opacity: 0.8; }
+  .card-faded-bg:hover .bg-layer img { transform: scale(1.08); opacity: 1; }
+  
+  /* The dynamic gradient using variables */
+  .bg-gradient { 
+    position: absolute; inset: 0; z-index: 2;
+    background: linear-gradient(to left, var(--fade-0) 0%, var(--fade-100) 65%, var(--fade-100) 100%);
+  }
+
+  .card-content { position: relative; z-index: 10; max-width: 65%; pointer-events: none; }
+  
+  /* Timeline specific */
   .timeline { position: relative; padding-left: 2rem; }
   .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, var(--orange), transparent); }
-  .timeline-item { position: relative; margin-bottom: 3rem; padding: 2rem; background: var(--black2); border: 1px solid var(--border); border-left: 3px solid transparent; transition: 0.3s; }
-  .experience-card-expandable { cursor: pointer; }
-  .experience-card-expandable:hover { border-left-color: var(--orange); background: var(--black3); transform: translateX(6px); }
-  .card-expand-hint { font-size: 0.72rem; letter-spacing: 0.1em; color: var(--orange); text-transform: uppercase; margin-top: 1rem; opacity: 0.7; transition: opacity 0.3s; }
-  .experience-card-expandable:hover .card-expand-hint { opacity: 1; }
-  .timeline-item::before { content: ''; position: absolute; left: -2.55rem; top: 2.4rem; width: 10px; height: 10px; background: var(--orange); border-radius: 50%; box-shadow: 0 0 0 3px var(--black), 0 0 0 5px var(--orange-dim); }
+  .card-faded-bg::before { content: ''; position: absolute; left: -2.55rem; top: 2.4rem; width: 10px; height: 10px; background: var(--orange); border-radius: 50%; box-shadow: 0 0 0 3px var(--black), 0 0 0 5px var(--orange-dim); z-index: 10; }
+  
   .timeline-date { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--orange); font-weight: 600; margin-bottom: 0.5rem; }
-  .timeline-role { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 0.04em; margin-bottom: 0.2rem; }
-  .timeline-org { font-size: 0.85rem; color: var(--gray); margin-bottom: 1.2rem; }
+  .timeline-role { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 0.04em; margin-bottom: 0.2rem; text-shadow: var(--text-shadow-val); color: var(--white); }
+  .timeline-org { font-size: 0.9rem; color: var(--white); margin-bottom: 1.2rem; font-weight: 500; }
   .timeline-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
-  .timeline-bullets li { font-size: 0.9rem; color: var(--gray); line-height: 1.6; padding-left: 1.2rem; position: relative; }
+  .timeline-bullets li { font-size: 0.9rem; color: var(--white); line-height: 1.6; padding-left: 1.2rem; position: relative; text-shadow: var(--text-shadow-val); }
   .timeline-bullets li::before { content: '▸'; position: absolute; left: 0; color: var(--orange); font-size: 0.7rem; top: 0.1rem; }
+  
+  .card-expand-hint { font-size: 0.72rem; letter-spacing: 0.1em; color: var(--orange); text-transform: uppercase; margin-top: 1.5rem; opacity: 0.5; transition: 0.3s; }
+  .card-faded-bg:hover .card-expand-hint { opacity: 1; }
 
   /* Projects */
-  #projects { border-top: 1px solid var(--border); }
-  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
-  .project-card { background: var(--black2); border: 1px solid var(--border); overflow: hidden; position: relative; transition: 0.3s; }
-  .project-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(138, 153, 166, 0.12); }
-  .project-body { padding: 1.8rem; }
-  .project-award { display: inline-block; padding: 0.25rem 0.7rem; background: rgba(138, 153, 166, 0.1); border: 1px solid rgba(138, 153, 166, 0.3); color: var(--orange); font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; margin-bottom: 0.9rem; }
-  .project-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 0.04em; margin-bottom: 0.7rem; }
-  .project-desc { font-size: 0.88rem; color: var(--gray); line-height: 1.7; }
+  .projects-grid { display: flex; flex-direction: column; gap: 2rem; }
+  .project-card { min-height: 280px; margin-bottom: 0; border-left: 1px solid var(--border); }
+  .project-award { display: inline-block; padding: 0.3rem 0.8rem; background: rgba(138,153,166,0.15); border: 1px solid var(--orange); color: var(--orange); font-size: 0.7rem; text-transform: uppercase; font-weight: 600; margin-bottom: 0.9rem; }
+  .project-title { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: 0.04em; margin-bottom: 0.8rem; text-shadow: var(--text-shadow-val); color: var(--white); }
+  .project-desc { font-size: 0.95rem; color: var(--white); line-height: 1.8; text-shadow: var(--text-shadow-val); }
 
-  /* Skills */
-  #skills { border-top: 1px solid var(--border); }
+  /* Skills & Contact */
   .skills-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
   .skill-group-title { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--orange); font-weight: 600; margin-bottom: 1.5rem; }
   .skill-tags { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 2rem; }
-  .skill-tag { padding: 0.5rem 1.1rem; border: 1px solid var(--border); font-size: 0.82rem; color: var(--gray); letter-spacing: 0.05em; transition: 0.3s; clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px)); }
-  .skill-tag:hover { border-color: var(--orange); color: var(--orange); background: var(--orange-glow); }
-
-  /* Contact */
-  #contact { border-top: 1px solid var(--border); }
-  .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
-  .contact-intro { font-size: 1.05rem; color: var(--gray); line-height: 1.8; font-weight: 300; margin-bottom: 2rem; }
-  .contact-items { display: flex; flex-direction: column; gap: 1.2rem; }
-  .contact-item { display: flex; align-items: center; gap: 1.2rem; padding: 1.2rem 1.5rem; background: var(--black2); border: 1px solid var(--border); text-decoration: none; color: var(--white); transition: 0.3s; }
-  .contact-item:hover { border-color: var(--orange); background: var(--black3); }
-  .contact-icon { width: 38px; height: 38px; background: var(--orange-glow); border: 1px solid rgba(138, 153, 166, 0.3); display: flex; align-items: center; justify-content: center; color: var(--orange); font-size: 1rem; flex-shrink: 0; }
-  .contact-detail { display: flex; flex-direction: column; gap: 0.15rem; }
-  .contact-label { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray); }
-  .contact-value { font-size: 0.9rem; font-weight: 500; }
-  .contact-form-note { font-size: 0.9rem; color: var(--gray); line-height: 1.7; padding: 2.5rem; background: var(--black2); border: 1px solid var(--border); border-left: 3px solid var(--orange); }
-
-  /* Modals */
-  .modal-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.85); z-index: 1000; opacity: 0; visibility: hidden; transition: 0.4s; backdrop-filter: blur(8px); display: flex; justify-content: center; align-items: center; padding: 2rem; cursor: pointer; } 
-  .modal-overlay.open { opacity: 1; visibility: visible; }
-  .modal-content { background: var(--modal-bg); border: 1px solid var(--border); max-width: 1000px; width: 100%; max-height: 90vh; overflow-y: auto; position: relative; box-shadow: 0 20px 80px rgba(0, 0, 0, 0.5); padding: 4rem 3rem 3rem; cursor: default; } 
-  .modal-close { position: absolute; top: 1.5rem; right: 1.5rem; background: none; border: none; font-size: 1.5rem; color: var(--gray); cursor: pointer; transition: 0.2s; }
-  .modal-close:hover { color: var(--white); transform: scale(1.1); }
-  .deep-dive-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 4vw, 3rem); letter-spacing: 0.05em; margin-bottom: 2rem; color: var(--orange); }
-  .deep-dive-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 3rem; margin-top: 2rem; }
-  .deep-dive-main-text { font-size: 1rem; color: var(--gray); line-height: 1.8; font-weight: 300; }
-  .deep-dive-main-text h4 { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1.1rem; color: var(--white); margin-top: 2rem; margin-bottom: 0.8rem; }
+  .skill-tag { padding: 0.5rem 1.1rem; border: 1px solid var(--border); font-size: 0.82rem; color: var(--gray); clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px)); }
+  .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+  .contact-item { display: flex; align-items: center; gap: 1.2rem; padding: 1.2rem 1.5rem; background: var(--black2); border: 1px solid var(--border); text-decoration: none; color: var(--white); margin-bottom: 1rem; transition: 0.3s; }
+  .contact-item:hover { border-color: var(--orange); }
+  .contact-icon { width: 38px; height: 38px; background: var(--orange-glow); display: flex; align-items: center; justify-content: center; color: var(--orange); }
+  .contact-label { font-size: 0.65rem; text-transform: uppercase; color: var(--gray); display: block; }
   
-  .deep-dive-gallery { margin-top: 3rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
-  .gallery-item { background: var(--black3); border: 1px solid var(--border); overflow: hidden; display: flex; flex-direction: column; }
-  .gallery-item img { width: 100%; height: 220px; display: block; object-fit: contain; padding: 0.5rem; background: var(--black2); }
-  .gallery-item p { padding: 1rem; font-size: 0.8rem; color: var(--gray); border-top: 1px solid var(--border); text-align: center; margin: auto 0 0 0; }
-  
-  .technical-sidebar { position: sticky; top: 2rem; background: var(--black2); border: 1px solid var(--border); padding: 2rem; display: flex; flex-direction: column; gap: 1.5rem; }
-  .tech-item h5 { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--orange); margin-bottom: 0.5rem; }
-  .tech-item p { font-size: 0.9rem; color: var(--white); line-height: 1.6; }
-
-  @media (max-width: 768px) {
-    .deep-dive-grid { grid-template-columns: 1fr; gap: 2rem; }
-    .technical-sidebar { position: static; }
-    .modal-content { padding: 3rem 1.5rem 2rem; }
-    .deep-dive-gallery { grid-template-columns: 1fr; }
-  }
-
   /* Footer */
-  footer { border-top: 1px solid var(--border); padding: 2rem 4rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: var(--gray2); letter-spacing: 0.08em; }
-  .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; color: var(--gray2); }
-  .footer-logo span { color: var(--orange); }
+  footer { border-top: 1px solid var(--border); padding: 2.5rem 4rem; display: flex; flex-direction: column; align-items: center; gap: 0.6rem; text-align: center; font-size: 0.75rem; color: var(--gray); }
+  .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; color: var(--gray); }
+  .footer-logo span { color: var(--orange-dim); }
+
+  /* Modals & Lightbox */
+  .modal-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.85); z-index: 1000; opacity: 0; visibility: hidden; transition: 0.3s; display: flex; justify-content: center; align-items: center; padding: 2rem; }
+  .modal-overlay.open { opacity: 1; visibility: visible; }
+  .modal-content { background: var(--black); border: 1px solid var(--border); width: 100%; max-width: 1000px; max-height: 90vh; overflow-y: auto; padding: 3rem; position: relative; }
+  .modal-close { position: absolute; top: 1rem; right: 1.5rem; background: none; border: none; font-size: 2rem; color: var(--gray); cursor: pointer; }
+  
+  .deep-dive-title { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; color: var(--orange); }
+  .deep-dive-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; margin-top: 1.5rem; }
+  .deep-dive-main-text { font-size: 0.95rem; color: var(--gray); line-height: 1.8; }
+  .deep-dive-main-text h4 { color: var(--white); margin: 1.5rem 0 0.5rem; }
+  .deep-dive-gallery { margin-top: 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; }
+  .gallery-item { background: var(--black2); border: 1px solid var(--border); cursor: pointer; transition: 0.3s; }
+  .gallery-item:hover { border-color: var(--orange); transform: translateY(-3px); }
+  .gallery-item img { width: 100%; height: 180px; object-fit: cover; }
+  .gallery-item p { padding: 0.8rem; font-size: 0.75rem; text-align: center; color: var(--gray); margin: 0; }
+  
+  .lightbox-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 2000; opacity: 0; visibility: hidden; display: flex; justify-content: center; align-items: center; }
+  .lightbox-overlay.open { opacity: 1; visibility: visible; }
+  .lightbox-img { max-width: 90vw; max-height: 90vh; border: 1px solid var(--border); border-radius: 8px; }
+  .lightbox-close { position: absolute; top: 1rem; right: 2rem; background: none; border: none; font-size: 3rem; color: white; cursor: pointer; }
 
   /* Animations */
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-  .reveal { opacity: 0; transform: translateY(40px); transition: 0.7s ease; }
+  .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s ease; }
   .reveal.visible { opacity: 1; transform: none; }
 
-  /* Responsive */
+  /* Mobile */
   @media (max-width: 900px) {
-    nav { padding: 1.2rem 2rem; }
-    .nav-links { display: none; }
-    .hamburger { display: flex; }
-    .hero { padding: 7rem 2rem 4rem; }
-    .hero-layout { flex-direction: column; gap: 3rem; margin-top: 2rem; }
-    .hero-image-wrapper { justify-content: center; width: 100%; }
-    .hero-img { width: 220px; margin: 0 auto; transform: none; box-shadow: 15px 15px 0px var(--border); }
-    .hero-img:hover { transform: translateY(-5px); box-shadow: 15px 15px 0px var(--orange-dim); }
-    .hero-scroll { left: 2rem; }
+    .about-grid, .skills-layout, .contact-layout, .deep-dive-grid { grid-template-columns: 1fr; }
+    .hero-layout { flex-direction: column; }
+    .card-content { max-width: 100%; }
+    .bg-gradient { background: linear-gradient(to left, var(--fade-0) 0%, var(--fade-100) 40%, var(--fade-100) 100%); }
+    nav { padding: 1rem 2rem; }
     section { padding: 4rem 2rem; }
-    .about-grid, .skills-layout, .contact-layout { grid-template-columns: 1fr; gap: 2.5rem; }
-    .timeline { padding-left: 1.5rem; }
-    footer { padding: 1.5rem 2rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+    .timeline-item { padding: 2rem; }
   }
 </style>
 </head>
@@ -186,31 +189,28 @@
     <li><a href="#contact">Contact</a></li>
   </ul>
   <div class="nav-controls">
-    <button id="themeToggle" class="theme-btn" aria-label="Toggle Theme">☀️</button>
-    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    <button id="themeToggle" class="theme-btn">☀️</button>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
   </div>
 </nav>
 
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#about" onclick="closeMobile()">About</a>
-  <a href="#experience" onclick="closeMobile()">Experience</a>
-  <a href="#projects" onclick="closeMobile()">Projects</a>
-  <a href="#skills" onclick="closeMobile()">Skills</a>
-  <a href="#contact" onclick="closeMobile()">Contact</a>
+  <a href="#about">About</a><a href="#experience">Experience</a><a href="#projects">Projects</a><a href="#skills">Skills</a><a href="#contact">Contact</a>
 </div>
 
-<div class="hero" id="home">
+<div class="hero">
   <div class="hero-bg-grid"></div>
-  <div class="hero-bg-glow"></div>
   <div class="hero-layout">
-    <div class="hero-content">
+    <div class="hero-content reveal">
       <p class="hero-tag">Mechanical Design & Production Engineering</p>
       <h1 class="hero-name">MOHAMED<br><span>ABDEL</span><span class="outline">NASER</span></h1>
-      <p class="hero-sub">Mechanical Design & Production Engineering student at Ain Shams University. Specialized in mechanical design fundamentals, mechanism synthesis, and advanced CAD/CAE. Proficient in Stress Analysis (FEA), Design for Manufacturing (DFM), and Design for Assembly (DFA) to deliver production-ready engineering solutions.</p>
+      <p class="hero-sub">Specialized in mechanical design fundamentals, mechanism synthesis, and advanced CAD/CAE. Proficient in Stress Analysis (FEA), Design for Manufacturing (DFM), and Design for Assembly (DFA).</p>
+      <div class="hero-cta">
+        <a href="https://drive.google.com/uc?id=1A890cT9neIG4pFRJd1OwW0VDf-uXdtZe&export=download" class="btn-primary">Download My CV</a>
+      </div>
     </div>
-    <div class="hero-image-wrapper reveal"><img src="me.jpeg" alt="Mohamed Abdelnaser" class="hero-img"></div>
+    <div class="hero-image-wrapper reveal"><img src="me.jpeg" class="hero-img" loading="lazy"></div>
   </div>
-  <div class="hero-scroll">Scroll to explore</div>
 </div>
 
 <section id="about">
@@ -218,15 +218,13 @@
   <h2 class="section-title">ABOUT ME</h2>
   <div class="about-grid">
     <div class="about-text reveal">
-      I'm a <strong>Mechanical Design and Production Engineering</strong> student at <strong>Ain Shams University</strong>, Cairo, with strong expertise in mechanical design fundamentals, mechanism synthesis, and manufacturing technologies. My skillset covers precise 3D modeling, stress analysis (FEA), and robust application of <strong>DFM (Design for Manufacturing)</strong> and <strong>DFA (Design for Assembly)</strong> principles to ensure seamless transition from concept to shop floor.<br><br>
-      As the <strong>EV-VHD Team Leader</strong> at ASU Racing, I lead the design, manufacturing, sub-system integration, assembly, and testing of steering, braking, and wheel systems for the Urban Concept vehicle competing in the <strong>Shell Eco-Marathon 2027</strong>.<br><br>
-      My passion lies in taking a concept from a CAD model all the way to a working prototype — bridging the gap between design intent and physical reality.
+      I'm a <strong>Mechanical Design and Production Engineering</strong> student at <strong>Ain Shams University</strong>. As the <strong>EV-VHD Team Leader</strong> at ASU Racing, I lead the design, manufacturing, sub-system integration, and testing of steering, braking, and wheel systems for the <strong>Shell Eco-Marathon 2027</strong>. My passion lies in taking a concept from a CAD model all the way to a working, physical prototype — bridging the gap between design intent and physical reality.
     </div>
     <div class="stats-grid reveal">
-      <div class="stat-item"><div class="stat-num">5+</div><div class="stat-label">Internships & Trainings</div></div>
-      <div class="stat-item"><div class="stat-num">2</div><div class="stat-label">Award-Winning Projects</div></div>
-      <div class="stat-item"><div class="stat-num">6+</div><div class="stat-label">CAD/CAE/CAM Tools</div></div>
-      <div class="stat-item"><div class="stat-num">2027</div><div class="stat-label">Expected Graduation</div></div>
+      <div class="stat-item"><div class="stat-num">5+</div><div class="stat-label">Internships</div></div>
+      <div class="stat-item"><div class="stat-num">2</div><div class="stat-label">Awards</div></div>
+      <div class="stat-item"><div class="stat-num">6+</div><div class="stat-label">CAD Tools</div></div>
+      <div class="stat-item"><div class="stat-num">2027</div><div class="stat-label">Graduation</div></div>
     </div>
   </div>
 </section>
@@ -236,58 +234,81 @@
   <h2 class="section-title">EXPERIENCE</h2>
   <div class="timeline">
     
-    <div class="timeline-item experience-card-expandable reveal" id="exp1">
-      <div class="timeline-date">March 2026 – Present</div>
-      <div class="timeline-role">Mechanical Designer</div>
-      <div class="timeline-org">Royal Herbs & iHub Automation Challenge</div>
-      <ul class="timeline-bullets">
-        <li>Secured 1st place in Phase 1 by designing an automated tea packaging machine.</li>
-        <li>Engineered a 3-module system (conveyor, robotic arm, rotary table).</li>
-      </ul>
-      <div class="card-expand-hint">Click for deeper project insights →</div>
+    <div class="card-faded-bg reveal" id="exp1">
+      <div class="bg-layer"><img src="Royal-Herbs-assembly-iso-renderd.jpeg" loading="lazy"></div>
+      <div class="bg-gradient"></div>
+      <div class="card-content">
+        <div class="timeline-date">March 2026 – Present</div>
+        <div class="timeline-role">Mechanical Designer</div>
+        <div class="timeline-org">Royal Herbs & iHub Automation Challenge</div>
+        <ul class="timeline-bullets">
+          <li>Secured 1st place in Phase 1 by designing an automated tea packaging machine.</li>
+          <li>Engineered a 3-module system (conveyor, robotic arm, rotary table) translating CAD models into an industrial prototype.</li>
+        </ul>
+        <div class="card-expand-hint">Click for deeper project insights →</div>
+      </div>
     </div>
 
-    <div class="timeline-item experience-card-expandable reveal" id="exp2">
-      <div class="timeline-date">Dec 2024 – Present</div>
-      <div class="timeline-role">EV-VHD Team Leader</div>
-      <div class="timeline-org">ASU Racing Team</div>
-      <ul class="timeline-bullets">
-        <li>Leading the Vehicle Handling Team designing steering, braking, and wheel systems for the Shell Eco-marathon 2027.</li>
-      </ul>
-      <div class="card-expand-hint">Click for deeper project insights →</div>
+    <div class="card-faded-bg reveal" id="exp2">
+      <div class="bg-layer"><img src="ASURT-ful-assembly.jpeg" loading="lazy"></div>
+      <div class="bg-gradient"></div>
+      <div class="card-content">
+        <div class="timeline-date">Dec 2024 – Present</div>
+        <div class="timeline-role">EV-VHD Team Leader</div>
+        <div class="timeline-org">ASU Racing Team</div>
+        <ul class="timeline-bullets">
+          <li>Leading the Vehicle Handling Team designing steering, braking, and wheel systems for the Shell Eco-marathon 2027.</li>
+          <li>Applying mechanical design principles and simulation tools to optimize vehicle performance and dynamic efficiency.</li>
+        </ul>
+        <div class="card-expand-hint">Click for deeper project insights →</div>
+      </div>
     </div>
 
-    <div class="timeline-item experience-card-expandable reveal" id="exp3">
-      <div class="timeline-date">March – April 2025</div>
-      <div class="timeline-role">CNC Trainee</div>
-      <div class="timeline-org">iHub</div>
-      <ul class="timeline-bullets">
-        <li>Gained hands-on experience with CNC milling, laser cutting, and Fusion 360 CAM software.</li>
-      </ul>
-      <div class="card-expand-hint">Click for deeper project insights →</div>
+    <div class="card-faded-bg reveal" id="exp3">
+      <div class="bg-layer"><img src="IHUB-CNC-milling-operation.jpeg" loading="lazy"></div>
+      <div class="bg-gradient"></div>
+      <div class="card-content">
+        <div class="timeline-date">March – April 2025</div>
+        <div class="timeline-role">CNC Trainee</div>
+        <div class="timeline-org">iHub</div>
+        <ul class="timeline-bullets">
+          <li>Gained hands-on experience with CNC milling, laser cutting, and Fusion 360 CAM software.</li>
+          <li>Utilized G-code and manufactured components, including designing and producing a vernier scale via laser cutting.</li>
+        </ul>
+        <div class="card-expand-hint">Click for deeper project insights →</div>
+      </div>
     </div>
 
-    <div class="timeline-item experience-card-expandable reveal" id="exp4">
-      <div class="timeline-date">July – Sept 2025</div>
-      <div class="timeline-role">Technical Office Intern</div>
-      <div class="timeline-org">ACROW Formwork and Technology</div>
-      <ul class="timeline-bullets">
-        <li>Contributed to active projects by preparing formwork panels and developing detailed Bills of Materials (BOM).</li>
-        <li>Produced precise shop drawings for manufacturing and gained expertise in advanced modeling and weldments.</li>
-      </ul>
-      <div class="card-expand-hint">Click for deeper project insights →</div>
+    <div class="card-faded-bg reveal" id="exp4">
+      <div class="bg-layer"><img src="Acrow-girder-assem.png" loading="lazy"></div>
+      <div class="bg-gradient"></div>
+      <div class="card-content">
+        <div class="timeline-date">July – Sept 2025</div>
+        <div class="timeline-role">Technical Office Intern</div>
+        <div class="timeline-org">ACROW Formwork and Technology</div>
+        <ul class="timeline-bullets">
+          <li>Contributed to active projects by preparing formwork panels and developing detailed Bills of Materials (BOM).</li>
+          <li>Produced precise shop drawings for manufacturing, gaining experience in advanced modeling and weldments.</li>
+        </ul>
+        <div class="card-expand-hint">Click for deeper project insights →</div>
+      </div>
     </div>
 
-    <div class="timeline-item experience-card-expandable reveal" id="exp5">
-      <div class="timeline-date">July – Aug 2024</div>
-      <div class="timeline-role">Engineering Trainee</div>
-      <div class="timeline-org">National Authority of Tunnels (NAT)</div>
-      <ul class="timeline-bullets">
-        <li>Gained exposure to large-scale mechanical systems including HVAC, firefighting, and smoke extraction systems.</li>
-        <li>Observed maintenance procedures for escalators, elevators, and Light Rail Transit (LRT) components.</li>
-      </ul>
-      <div class="card-expand-hint">Click for deeper project insights →</div>
+    <div class="card-faded-bg reveal" id="exp5">
+      <div class="bg-layer"><img src="NAT-LRT.jpeg" loading="lazy"></div>
+      <div class="bg-gradient"></div>
+      <div class="card-content">
+        <div class="timeline-date">July – Aug 2024</div>
+        <div class="timeline-role">Engineering Trainee</div>
+        <div class="timeline-org">National Authority of Tunnels (NAT)</div>
+        <ul class="timeline-bullets">
+          <li>Gained exposure to large-scale mechanical systems including HVAC, firefighting, and smoke extraction systems.</li>
+          <li>Observed light and heavy overhaul procedures and maintenance for Escalators, Elevators, and Light Rail Transit (LRT).</li>
+        </ul>
+        <div class="card-expand-hint">Click for deeper project insights →</div>
+      </div>
     </div>
+
   </div>
 </section>
 
@@ -295,15 +316,28 @@
   <div class="section-label">Selected Work</div>
   <h2 class="section-title">PROJECTS</h2>
   <div class="projects-grid">
-    <div class="project-card reveal">
-      <div class="project-body"><span class="project-award">🏆 1st Place & Best Manufacturing</span><h3 class="project-title">Smart Flow Meter</h3><p class="project-desc">Awarded first place for highest accuracy, superior structural design, and best manufacturing in a departmental engineering competition.</p></div>
+    
+    <div class="card-faded-bg project-card reveal" id="projFlowMeter">
+      <div class="bg-layer"><img src="gas-flowmeter-assem.jpeg" loading="lazy"></div>
+      <div class="bg-gradient"></div>
+      <div class="card-content">
+        <span class="project-award">🏆 1st Place & Best Manufacturing</span>
+        <h3 class="project-title">Smart Gas Flow Meter</h3>
+        <p class="project-desc">Awarded first place for highest accuracy and best manufacturing. Designed and fabricated a full vortex-shedding flow meter from scratch, handling CAD, casting, and precision CNC machining.</p>
+        <div class="card-expand-hint">Click for deeper project insights →</div>
+      </div>
     </div>
-    <div class="project-card reveal">
-      <div class="project-body"><h3 class="project-title">Full Metallic Stirling Engine</h3><p class="project-desc">Developed and fabricated a fully functional Stirling engine, applying advanced thermodynamics and precision machining to achieve smooth mechanical motion.</p></div>
+    
+    <div class="card-faded-bg project-card reveal" id="projStirling">
+      <div class="bg-layer"><img src="stirling-assem-top.jpeg" loading="lazy"></div>
+      <div class="bg-gradient"></div>
+      <div class="card-content">
+        <h3 class="project-title">Full Metallic Stirling Engine</h3>
+        <p class="project-desc">Designed and fabricated a fully metallic mechanism, focusing on precision manufacturing, toughened steel components, and high-tolerance integration to ensure smooth mechanical motion.</p>
+        <div class="card-expand-hint">Click for deeper project insights →</div>
+      </div>
     </div>
-    <div class="project-card reveal">
-      <div class="project-body"><h3 class="project-title">3-DOF Hydraulic Missile Launcher</h3><p class="project-desc">Designed a 3-degree-of-freedom hydraulic mechanism with integrated circuit logic ensuring structural integrity and precise angular positioning.</p></div>
-    </div>
+    
   </div>
 </section>
 
@@ -314,17 +348,19 @@
     <div class="reveal">
       <p class="skill-group-title">CAD / CAE / CAM</p>
       <div class="skill-tags">
-        <span class="skill-tag">SolidWorks (CSWP)</span><span class="skill-tag">Autodesk Inventor</span><span class="skill-tag">AutoCAD</span><span class="skill-tag">Fusion 360</span><span class="skill-tag">ANSYS Static Analysis</span><span class="skill-tag">MATLAB & Simulink</span><span class="skill-tag">Fusion 360 CAM</span>
+        <span class="skill-tag">SolidWorks (CSWP)</span><span class="skill-tag">Autodesk Inventor</span><span class="skill-tag">AutoCAD</span><span class="skill-tag">Fusion 360</span><span class="skill-tag">ANSYS Static Analysis</span><span class="skill-tag">MATLAB</span>
       </div>
       <p class="skill-group-title">Professional Skills</p>
-      <div class="skill-tags"><span class="skill-tag">Team Leadership</span><span class="skill-tag">Project Management</span><span class="skill-tag">Problem Solving</span><span class="skill-tag">Critical Thinking</span><span class="skill-tag">Communication</span><span class="skill-tag">Teamwork</span></div>
+      <div class="skill-tags">
+        <span class="skill-tag">Team Leadership</span><span class="skill-tag">Project Management</span><span class="skill-tag">DFM & DFA</span><span class="skill-tag">Critical Thinking</span>
+      </div>
     </div>
     <div class="reveal">
       <p class="skill-group-title">Education</p>
       <div style="padding: 1.5rem; background: var(--black2); border: 1px solid var(--border); border-left: 3px solid var(--orange);">
-        <div style="font-family:'Bebas Neue',sans-serif; font-size:1.3rem; letter-spacing:0.04em; margin-bottom:0.4rem;">Ain Shams University</div>
+        <div style="font-family:'Bebas Neue',sans-serif; font-size:1.3rem; margin-bottom:0.4rem;">Ain Shams University</div>
         <div style="font-size:0.85rem; color:var(--gray); margin-bottom:0.5rem;">B.S. Production & Mechanical Design Engineering</div>
-        <div style="font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--orange);">Expected Graduation: 2027 · Cairo, Egypt</div>
+        <div style="font-size:0.75rem; letter-spacing:0.1em; color:var(--orange);">Expected Graduation: 2027 · Cairo, Egypt</div>
       </div>
     </div>
   </div>
@@ -334,16 +370,14 @@
   <div class="section-label">Let's Connect</div>
   <h2 class="section-title">CONTACT</h2>
   <div class="contact-layout">
-    <div>
-      <p class="contact-intro">Looking for a motivated mechanical design intern or collaborator? I'm open to opportunities, projects, and conversations.</p>
+    <div class="reveal">
+      <p class="contact-intro">Looking for a motivated mechanical design intern or collaborator? I'm open to opportunities and projects.</p>
       <div class="contact-items">
-        <a href="tel:+201101024505" class="contact-item"><div class="contact-icon">📞</div><div class="contact-detail"><span class="contact-label">Phone 1</span><span class="contact-value">+20 110 102 4505</span></div></a>
-        <a href="tel:+201099591221" class="contact-item"><div class="contact-icon">📞</div><div class="contact-detail"><span class="contact-label">Phone 2</span><span class="contact-value">+20 109 959 1221</span></div></a>
-        <a href="mailto:mohamed6abouzeid@gmail.com" class="contact-item"><div class="contact-icon">✉️</div><div class="contact-detail"><span class="contact-label">Email</span><span class="contact-value">mohamed6abouzeid@gmail.com</span></div></a>
-        <a href="https://www.linkedin.com/in/mohamedbdelnaser" target="_blank" class="contact-item"><div class="contact-icon">in</div><div class="contact-detail"><span class="contact-label">LinkedIn</span><span class="contact-value">LinkedIn</span></div></a>
+        <a href="mailto:mohamed6abouzeid@gmail.com" class="contact-item"><div class="contact-icon">✉️</div><div><span class="contact-label">Email</span><span class="contact-value">mohamed6abouzeid@gmail.com</span></div></a>
+        <a href="https://www.linkedin.com/in/mohamedbdelnaser" class="contact-item" target="_blank"><div class="contact-icon">in</div><div><span class="contact-label">LinkedIn</span><span class="contact-value">Mohamed Abdelnaser</span></div></a>
+        <a href="tel:+201101024505" class="contact-item"><div class="contact-icon">📞</div><div><span class="contact-label">Phone</span><span class="contact-value">+20 110 102 4505</span></div></a>
       </div>
     </div>
-    <div class="contact-form-note reveal"><strong>Available for Internships</strong><br><br>I'm actively seeking mechanical design internship opportunities where I can apply my skills in SolidWorks, simulation, and manufacturing in a real-world engineering environment.</div>
   </div>
 </section>
 
@@ -353,143 +387,63 @@
   <div>© 2026</div>
 </footer>
 
-<div class="modal-overlay" id="modalExp1">
-  <div class="modal-content"><button class="modal-close" onclick="closeModal('modalExp1')">&times;</button>
-    <h3 class="deep-dive-title">PROJECT DEEP-DIVE: AUTOMATED TEA PACKAGING</h3>
-    <div class="deep-dive-grid">
-      <div class="deep-dive-main-text"><h4>Overview</h4>The 'Tawlefa' project aimed to design an automated packaging machine. I developed the conceptual and technical CAD designs for Phase 1, securing 1st place.<h4>Architecture</h4>1. Input Conveyor Station.<br>2. Pick-and-Place Robotic Arm.<br>3. Rotary Table.</div>
-      <div class="technical-sidebar"><div class="tech-item"><h5>Tool</h5><p>SolidWorks (CSWP)</p></div><div class="tech-item"><h5>Achievement</h5><p>1st Place, Phase 1</p></div></div>
-    </div>
-    <div class="deep-dive-gallery">
-      <div class="gallery-item"><img src="Royal-Herbs-Team-Photo.jpeg"><p>Team Presentation and Certificates</p></div>
-      <div class="gallery-item"><img src="Royal-Herbs-Modules.png"><p>Overall System Architecture</p></div>
-      <div class="gallery-item"><img src="Royal-Herbs-assembly-iso-renderd.jpeg"><p>Rendered Isometric View</p></div>
-      <div class="gallery-item"><img src="Royal-Herbs-assembly-iso.jpeg"><p>Isometric CAD Assembly</p></div>
-      <div class="gallery-item"><img src="Royal-Herbs-assembly-side.jpeg"><p>Side View CAD Assembly</p></div>
-      <div class="gallery-item"><img src="Royal-Herbs-Module-1.png"><p>Module 1: Bags Conveyor</p></div>
-      <div class="gallery-item"><img src="Royal-Herbs-Module-2.png"><p>Module 2: Pick-and-Place Robotic Arm</p></div>
-      <div class="gallery-item"><img src="Royal-Herbs-Module-3.png"><p>Module 3: Rotary Table and Carton Closing</p></div>
-    </div>
-  </div>
-</div>
+<div class="modal-overlay" id="modalExp1"><div class="modal-content"><button class="modal-close">&times;</button><h3 class="deep-dive-title">PROJECT DEEP-DIVE: AUTOMATED TEA PACKAGING SYSTEM</h3><div class="deep-dive-grid"><div class="deep-dive-main-text"><h4>Overview & Challenge</h4>The 'Tawlefa' project in collaboration with Royal Herbs and iHub aimed to design an automated packaging machine to improve production efficiency for packaging tea bags into boxes.<br><br>As a mechanical designer, I developed the conceptual and technical CAD designs for Phase 1, securing 1st place and advancing the project to the physical prototype development stage.<h4>Technical Design & Architecture</h4>The system consists of 3 integrated mechanical modules modeled thoroughly to optimize space and material flow:<br><br><strong>1. Input Conveyor Station:</strong> Responsible for feeding components smoothly.<br><strong>2. Pick-and-Place Robotic Arm:</strong> Designed for precise positioning and box loading.<br><strong>3. Rotary Table:</strong> Handles multi-station operations including box feeding and sealing.</div><div class="technical-sidebar"><div class="tech-item"><h5>Core Achievement</h5><p>1st Place, Phase 1</p></div><div class="tech-item"><h5>Primary Tool</h5><p>SolidWorks (CSWP)</p></div></div></div><div class="deep-dive-gallery lightbox-gallery"><div class="gallery-item"><img src="Royal-Herbs-Team-Photo.jpeg" loading="lazy"><p>Phase 1 Winners - Certificates</p></div><div class="gallery-item"><img src="Royal-Herbs-Modules.png" loading="lazy"><p>Overall System Architecture</p></div><div class="gallery-item"><img src="Royal-Herbs-assembly-iso-renderd.jpeg" loading="lazy"><p>Rendered Isometric View</p></div><div class="gallery-item"><img src="Royal-Herbs-assembly-iso.jpeg" loading="lazy"><p>Detailed Isometric CAD</p></div><div class="gallery-item"><img src="Royal-Herbs-assembly-side.jpeg" loading="lazy"><p>Side View CAD Linkages</p></div><div class="gallery-item"><img src="Royal-Herbs-Module-1.png" loading="lazy"><p>Module 1: Bags Conveyor</p></div><div class="gallery-item"><img src="Royal-Herbs-Module-2.png" loading="lazy"><p>Module 2: Pick-and-Place Arm</p></div><div class="gallery-item"><img src="Royal-Herbs-Module-3.png" loading="lazy"><p>Module 3: Rotary Table</p></div></div></div></div>
 
-<div class="modal-overlay" id="modalExp2">
-  <div class="modal-content"><button class="modal-close" onclick="closeModal('modalExp2')">&times;</button>
-    <h3 class="deep-dive-title">PROJECT DEEP-DIVE: ASU RACING - URBAN CONCEPT EV</h3>
-    <div class="deep-dive-grid">
-      <div class="deep-dive-main-text"><h4>Leadership & Role</h4>My role evolved from Member to Vice Leader, and currently EV-VHD Team Leader. This journey enhanced my Leadership, Time Management, and Teamwork skills.<h4>Technical Scope: Vehicle Handling (VHD)</h4>Overseeing design and simulation of Steering System, Braking System, and Wheel Assembly.</div>
-      <div class="technical-sidebar"><div class="tech-item"><h5>Role</h5><p>EV-VHD Team Leader</p></div><div class="tech-item"><h5>Focus</h5><p>Steering · Brakes · Wheels</p></div></div>
-    </div>
-    <div class="deep-dive-gallery">
-      <div class="gallery-item"><img src="ASURT-mme.jpeg"><p>Team Assembly Collaboration</p></div>
-      <div class="gallery-item"><img src="ASURT-ful-assembly.jpeg"><p>Full CAD Integration</p></div>
-      <div class="gallery-item"><img src="ASURT-steering-calc2.jpeg"><p>Steering Geometry Analysis</p></div>
-      <div class="gallery-item"><img src="ASURT-ASSEMBLY.jpeg"><p>Chassis Layout</p></div>
-      <div class="gallery-item"><img src="ASURT-ba.jpeg"><p>Brake Pedal CAD</p></div>
-      <div class="gallery-item"><img src="ASURT-brakes-tank.jpeg"><p>Master Cylinder Inspection</p></div>
-      <div class="gallery-item"><img src="ASURT-handbrakes.jpeg"><p>Handbrake Linkage</p></div>
-      <div class="gallery-item"><img src="ASURT-rim.jpeg"><p>Wheel Hub Integration</p></div>
-      <div class="gallery-item"><img src="ASURT-stress-analysis-upright.jpeg"><p>Upright FEA Validation</p></div>
-      <div class="gallery-item"><img src="ASURT-stress-analysis-brakes.jpeg"><p>Brake Disc FEA</p></div>
-      <div class="gallery-item"><img src="ASURT-stress-analysis-deadaxle.jpeg"><p>Dead Axle FEA</p></div>
-      <div class="gallery-item"><img src="ASURT-stress-analysis-RWA.jpeg"><p>RWA ANSYS Validation</p></div>
-    </div>
-  </div>
-</div>
+<div class="modal-overlay" id="modalASURT"><div class="modal-content"><button class="modal-close">&times;</button><h3 class="deep-dive-title">PROJECT DEEP-DIVE: ASU RACING - URBAN CONCEPT EV</h3><div class="deep-dive-grid"><div class="deep-dive-main-text"><h4>About the Competition</h4>The Shell Eco-marathon is a global academic program focused on energy efficiency. We compete in the "Urban Concept" category, focusing on road-legal, city-ready vehicle designs.<h4>My Journey & Leadership</h4>My role evolved from a technical Member to Vice Leader, and currently the EV-VHD Team Leader. This journey has been a masterclass in Leadership, Time Management, and Teamwork under strict competition deadlines.<h4>Technical Scope: Vehicle Handling (VHD)</h4>As VHD Leader, I oversee three critical sub-systems through design, simulation, and integration:<br><br><strong>1. Steering System:</strong> Designing for precision and minimal rolling resistance (Ackermann).<br><strong>2. Braking System:</strong> Ensuring reliable stopping power and safety compliance.<br><strong>3. Wheel Assembly:</strong> Optimizing hub, rim, and tire integration for maximum efficiency.</div><div class="technical-sidebar"><div class="tech-item"><h5>Role</h5><p>EV-VHD Team Leader</p></div><div class="tech-item"><h5>Focus</h5><p>Steering · Brakes · Wheels</p></div></div></div><div class="deep-dive-gallery lightbox-gallery"><div class="gallery-item"><img src="ASURT-mme.jpeg" loading="lazy"><p>Team Assembly Collaboration</p></div><div class="gallery-item"><img src="ASURT-ful-assembly.jpeg" loading="lazy"><p>Full CAD Integration</p></div><div class="gallery-item"><img src="ASURT-steering-calc2.jpeg" loading="lazy"><p>Steering Geometry Ackermann</p></div><div class="gallery-item"><img src="ASURT-ASSEMBLY.jpeg" loading="lazy"><p>Chassis Full Layout</p></div><div class="gallery-item"><img src="ASURT-ba.jpeg" loading="lazy"><p>Brake Pedal Assembly</p></div><div class="gallery-item"><img src="ASURT-brakes-tank.jpeg" loading="lazy"><p>Brake Tank Master Cylinder</p></div><div class="gallery-item"><img src="ASURT-handbrakes.jpeg" loading="lazy"><p>Handbrake Design</p></div><div class="gallery-item"><img src="ASURT-rim.jpeg" loading="lazy"><p>Rims Hub Wheel Assembly</p></div><div class="gallery-item"><img src="ASURT-stress-analysis-upright.jpeg" loading="lazy"><p>Upright ANSYS Stress Analysis</p></div><div class="gallery-item"><img src="ASURT-stress-analysis-brakes.jpeg" loading="lazy"><p>Brake Disc FEA Analysis</p></div><div class="gallery-item"><img src="ASURT-stress-analysis-deadaxle.jpeg" loading="lazy"><p>Dead Axle Stress Analysis</p></div><div class="gallery-item"><img src="ASURT-stress-analysis-RWA.jpeg" loading="lazy"><p>RWA Stress Analysis ANSYS</p></div></div></div></div>
 
-<div class="modal-overlay" id="modalExp3">
-  <div class="modal-content"><button class="modal-close" onclick="closeModal('modalExp3')">&times;</button>
-    <h3 class="deep-dive-title">PROJECT DEEP-DIVE: CNC MACHINING & LASER CUTTING</h3>
-    <div class="deep-dive-grid">
-      <div class="deep-dive-main-text"><h4>Overview & Technical Details</h4>Hands-on training focusing on subtractive manufacturing.<br><br><strong>- Fusion 360 CAM:</strong> Mastering Contour, Pocket, facing operations, and precise tool definition.<br><strong>- CNC Setup:</strong> Machine zeroing, running G-code, and monitoring.<br><strong>- Laser Cutting:</strong> Manufacturing precision 2D parts like a functional vernier scale.</div>
-      <div class="technical-sidebar"><div class="tech-item"><h5>Focus</h5><p>CNC Milling · Laser Cutting</p></div><div class="tech-item"><h5>Tools</h5><p>Fusion 360 CAM · G-code</p></div></div>
-    </div>
-    <div class="deep-dive-gallery">
-      <div class="gallery-item"><img src="IHUB-CNC-1.jpeg"><p>Fusion 360 CAM vs Final Part</p></div>
-      <div class="gallery-item"><img src="IHUB-CNC-milling-operation.jpeg"><p>CNC Machine in Operation</p></div>
-      <div class="gallery-item"><img src="IHUB-CNC-milling-op2.jpeg"><p>Facing and Pocketing</p></div>
-      <div class="gallery-item"><img src="IHUB-CNC-milling-part.jpeg"><p>Final Milled Part</p></div>
-      <div class="gallery-item"><img src="IHUB-CNC-laser.jpeg"><p>Laser Machine Operation</p></div>
-      <div class="gallery-item"><img src="IHUB-CNC-laaser-part.jpeg"><p>Custom Laser-Cut Vernier</p></div>
-      <div class="gallery-item"><img src="IHUB-CNC-parts1.jpeg"><p>Measuring the CNC part</p></div>
-      <div class="gallery-item"><img src="IHUB-CNC-parts2.jpeg"><p>Depth Validation</p></div>
-    </div>
-  </div>
-</div>
+<div class="modal-overlay" id="modalExp3"><div class="modal-content"><button class="modal-close">&times;</button><h3 class="deep-dive-title">PROJECT DEEP-DIVE: CNC MACHINING & LASER CUTTING</h3><div class="deep-dive-grid"><div class="deep-dive-main-text"><h4>Overview</h4>During my training at iHub, I gained hands-on experience in subtractive manufacturing, bridging the gap between digital models and physical parts.<h4>Technical Details</h4><strong>- Fusion 360 CAM:</strong> Mastering toolpath generation, including Contour, Pocket, and facing operations.<br><strong>- CNC Setup & Operation:</strong> Learning to properly zero the machine axes, safely run generated G-code, and monitor the machining process.<br><strong>- Laser Cutting:</strong> Understanding the working principles of laser cutters and applying them to manufacture precision 2D parts like a functional vernier scale.</div><div class="technical-sidebar"><div class="tech-item"><h5>Focus</h5><p>CNC Milling · Laser Cutting</p></div><div class="tech-item"><h5>Tools</h5><p>Fusion 360 CAM · G-code</p></div></div></div><div class="deep-dive-gallery lightbox-gallery"><div class="gallery-item"><img src="IHUB-CNC-1.jpeg" loading="lazy"><p>Fusion 360 CAM vs Final Part</p></div><div class="gallery-item"><img src="IHUB-CNC-milling-operation.jpeg" loading="lazy"><p>CNC Machine Milling Operation</p></div><div class="gallery-item"><img src="IHUB-CNC-milling-op2.jpeg" loading="lazy"><p>CNC Facing/Contour</p></div><div class="gallery-item"><img src="IHUB-CNC-milling-part.jpeg" loading="lazy"><p>Final CNC Milled Part</p></div><div class="gallery-item"><img src="IHUB-CNC-laser.jpeg" loading="lazy"><p>Laser Machine Operation</p></div><div class="gallery-item"><img src="IHUB-CNC-laaser-part.jpeg" loading="lazy"><p>Custom Laser-Cut Vernier</p></div><div class="gallery-item"><img src="IHUB-CNC-parts1.jpeg" loading="lazy"><p>Laser parts assembled verified</p></div><div class="gallery-item"><img src="IHUB-CNC-parts2.jpeg" loading="lazy"><p>Depth functional verification</p></div></div></div></div>
 
-<div class="modal-overlay" id="modalExp4">
-  <div class="modal-content"><button class="modal-close" onclick="closeModal('modalExp4')">&times;</button>
-    <h3 class="deep-dive-title">PROJECT DEEP-DIVE: ACROW FORMWORK & TECHNOLOGY</h3>
-    <div class="deep-dive-grid">
-      <div class="deep-dive-main-text"><h4>Overview</h4>During my time at Acrow, I delved into advanced mechanical design topics tailored for the construction and formwork industry.<h4>Technical Details</h4><strong>- Advanced 3D Modeling:</strong> Designing complex geometries like column crowns for major infrastructure projects (e.g., Dubai Metro, Riyadh Metro).<br><strong>- Sheet Metal & Weldments:</strong> Gained deep understanding of sheet metal design principles, girder assemblies, and structural weldments.<br><strong>- Manufacturing:</strong> Bridged the gap between office CAD design and workshop reality, observing the manufacturing processes of formwork systems.</div>
-      <div class="technical-sidebar"><div class="tech-item"><h5>Focus</h5><p>Formwork Systems · Weldments</p></div><div class="tech-item"><h5>Tools</h5><p>Advanced CAD · Sheet Metal</p></div></div>
-    </div>
-    <div class="deep-dive-gallery">
-      <div class="gallery-item"><img src="Acrow-Dubi-metro-crwon.png"><p>Dubai Metro: Column Crown Design</p></div>
-      <div class="gallery-item"><img src="Acrow-Riyadh-crown1.png"><p>Riyadh Metro: Crown Concept A</p></div>
-      <div class="gallery-item"><img src="Acrow-Riyadh-crown2.png"><p>Riyadh Metro: Crown Concept B</p></div>
-      <div class="gallery-item"><img src="Acrow-girder-front-panel.png"><p>Girder System: Front Panel Assembly</p></div>
-      <div class="gallery-item"><img src="Acrow-girder-side-panels.png"><p>Girder System: Side Panel Supports</p></div>
-      <div class="gallery-item"><img src="Acrow-girder-assem.png"><p>Full Girder Formwork Assembly</p></div>
-      <div class="gallery-item"><img src="Acrow-ws.jpg"><p>Acrow Workshop & Manufacturing Floor</p></div>
-      <div class="gallery-item"><img src="Acrow-Finalp1.jpg"><p>Manufactured Panels Ready for Deployment</p></div>
-      <div class="gallery-item"><img src="Acrow-finalp2.jpg"><p>Finished Circular Formwork Elements</p></div>
-      <div class="gallery-item"><img src="Acrow-finalp3.jpg"><p>Heavy-duty Girders Post-Production</p></div>
-    </div>
-  </div>
-</div>
+<div class="modal-overlay" id="modalExp4"><div class="modal-content"><button class="modal-close">&times;</button><h3 class="deep-dive-title">PROJECT DEEP-DIVE: ACROW FORMWORK & TECHNOLOGY</h3><div class="deep-dive-grid"><div class="deep-dive-main-text"><h4>Overview</h4>During my time at Acrow, I delved into advanced mechanical design topics tailored for the construction and formwork industry.<h4>Technical Details</h4><strong>- Advanced 3D Modeling:</strong> Designing complex geometries like column crowns for major infrastructure projects (e.g., Dubai Metro, Riyadh Metro).<br><strong>- Sheet Metal & Weldments:</strong> Gained deep understanding of sheet metal design principles, girder assemblies, and structural weldments.<br><strong>- Manufacturing:</strong> Bridged the gap between office CAD design and workshop reality, observing the manufacturing processes of formwork systems.</div><div class="technical-sidebar"><div class="tech-item"><h5>Focus</h5><p>Formwork Systems · Weldments</p></div><div class="tech-item"><h5>Tools</h5><p>Advanced CAD · Sheet Metal</p></div></div></div><div class="deep-dive-gallery lightbox-gallery"><div class="gallery-item"><img src="Acrow-Dubi-metro-crwon.png" loading="lazy"><p>Dubai Metro Circular Crown</p></div><div class="gallery-item"><img src="Acrow-Riyadh-crown1.png" loading="lazy"><p>Riyadh Metro Crown Concept A</p></div><div class="gallery-item"><img src="Acrow-Riyadh-crown2.png" loading="lazy"><p>Riyadh Metro Crown Concept B</p></div><div class="gallery-item"><img src="Acrow-girder-front-panel.png" loading="lazy"><p>Girder Front Panel Assembly</p></div><div class="gallery-item"><img src="Acrow-girder-side-panels.png" loading="lazy"><p>Girder Side Panel Supports</p></div><div class="gallery-item"><img src="Acrow-girder-assem.png" loading="lazy"><p>Full Girder Formwork Assembly</p></div><div class="gallery-item"><img src="Acrow-ws.jpg" loading="lazy"><p>ACROW Workshop Manufacturing</p></div><div class="gallery-item"><img src="Acrow-Finalp1.jpg" loading="lazy"><p>Manufactured Panel Ready</p></div><div class="gallery-item"><img src="Acrow-finalp2.jpg" loading="lazy"><p>Manufactured circular elements</p></div><div class="gallery-item"><img src="Acrow-finalp3.jpg" loading="lazy"><p>Heavy-duty girder panels</p></div></div></div></div>
 
-<div class="modal-overlay" id="modalExp5">
-  <div class="modal-content"><button class="modal-close" onclick="closeModal('modalExp5')">&times;</button>
-    <h3 class="deep-dive-title">ENGINEERING TRAINING: NATIONAL AUTHORITY OF TUNNELS</h3>
-    <div class="deep-dive-grid">
-      <div class="deep-dive-main-text"><h4>Overview</h4>An intensive on-site engineering training focused on the maintenance and operational infrastructure of modern transit systems.<h4>Key Systems Observed</h4><strong>- HVAC & Firefighting:</strong> Inspected massive tunnel ventilation systems (HVAC) and high-pressure firefighting networks and cylinder banks.<br><strong>- Passenger Conveyance:</strong> Examined the internal mechanics, motors, and safety brakes of heavy-duty escalators and elevators.<br><strong>- LRT Maintenance:</strong> Observed the Light Rail Transit (LRT) rolling stock, bogie/wheel assemblies, suspension mechanisms, and the automated train washing facilities.</div>
-      <div class="technical-sidebar"><div class="tech-item"><h5>Role</h5><p>Engineering Trainee</p></div><div class="tech-item"><h5>Focus</h5><p>HVAC · Firefighting · LRT</p></div></div>
-    </div>
-    <div class="deep-dive-gallery">
-      <div class="gallery-item"><img src="NAT-HVAC.jpeg"><p>Massive Tunnel Ventilation Dampers</p></div>
-      <div class="gallery-item"><img src="NAT-HVAC2.jpeg"><p>Heavy-duty HVAC Extraction Fan</p></div>
-      <div class="gallery-item"><img src="NAT-firefighting.jpeg"><p>Firefighting Suppression Cylinder Banks</p></div>
-      <div class="gallery-item"><img src="NAT-firefighting2.jpeg"><p>Firefighting Pump and Valve Network</p></div>
-      <div class="gallery-item"><img src="NAT-escalator.jpeg"><p>Escalator Motor and Drive Chain</p></div>
-      <div class="gallery-item"><img src="NAT-escalator2.jpeg"><p>Escalator Handrail Drive Mechanism</p></div>
-      <div class="gallery-item"><img src="NAT-LRT.jpeg"><p>Light Rail Transit (LRT) Train</p></div>
-      <div class="gallery-item"><img src="NAT-LRT-wheels.jpeg"><p>LRT Bogie and Suspension Overview</p></div>
-      <div class="gallery-item"><img src="NAT-LRT-wheels2.jpeg"><p>LRT Air Suspension and Wheel Assembly</p></div>
-      <div class="gallery-item"><img src="NAT-LRT-washing-machine.jpeg"><p>Automated LRT Washing Facility</p></div>
-    </div>
-  </div>
+<div class="modal-overlay" id="modalExp5"><div class="modal-content"><button class="modal-close">&times;</button><h3 class="deep-dive-title">ENGINEERING TRAINING: NATIONAL AUTHORITY OF TUNNELS</h3><div class="deep-dive-grid"><div class="deep-dive-main-text"><h4>Overview</h4>An intensive on-site engineering training focused on the maintenance and operational infrastructure of modern transit systems.<h4>Key Systems Observed</h4><strong>- HVAC & Firefighting:</strong> Inspected massive tunnel ventilation systems (HVAC) and high-pressure firefighting networks and cylinder banks.<br><strong>- Passenger Conveyance:</strong> Examined the internal mechanics, motors, and safety brakes of heavy-duty escalators and elevators.<br><strong>- LRT Maintenance:</strong> Observed the Light Rail Transit (LRT) rolling stock, bogie/wheel assemblies, suspension mechanisms, and the automated train washing facilities.</div><div class="technical-sidebar"><div class="tech-item"><h5>Focus</h5><p>HVAC · Firefighting · LRT</p></div></div></div><div class="deep-dive-gallery lightbox-gallery"><div class="gallery-item"><img src="NAT-HVAC.jpeg" loading="lazy"><p>Tunnels Ventilation Damper System</p></div><div class="gallery-item"><img src="NAT-HVAC2.jpeg" loading="lazy"><p>HVAC Smoke Extraction Fan</p></div><div class="gallery-item"><img src="NAT-firefighting.jpeg" loading="lazy"><p>Fire Suppressant Tank Banks</p></div><div class="gallery-item"><img src="NAT-firefighting2.jpeg" loading="lazy"><p>Firefighting High Pressure Network</p></div><div class="gallery-item"><img src="NAT-escalator.jpeg" loading="lazy"><p>Escalator Drive Mechanism</p></div><div class="gallery-item"><img src="NAT-escalator2.jpeg" loading="lazy"><p>Escalator Step Chain System</p></div><div class="gallery-item"><img src="NAT-LRT.jpeg" loading="lazy"><p>Light Rail Transit LRT Train</p></div><div class="gallery-item"><img src="NAT-LRT-wheels.jpeg" loading="lazy"><p>LRT Train Bogie Suspension overview</p></div><div class="gallery-item"><img src="NAT-LRT-wheels2.jpeg" loading="lazy"><p>LRT Wheel Air Suspension</p></div><div class="gallery-item"><img src="NAT-LRT-washing-machine.jpeg" loading="lazy"><p>Automated LRT Washing Facility</p></div></div></div></div>
+
+<div class="modal-overlay" id="modalFlowMeter"><div class="modal-content"><button class="modal-close">&times;</button><h3 class="deep-dive-title">🏆 1st Place & Best Manufacturing: SMART GAS FLOW METER</h3><div class="deep-dive-grid"><div class="deep-dive-main-text"><h4>Overview</h4>Our Vortex Shedding Gas Flow Meter secured the <strong>First Place for highest reading accuracy</strong> and the <strong>Best Manufacturing award</strong> in the departmental competition. We bridged CAD models and rigorous simulation with industrial-grade production and validation.<h4>Design and Manufacturing</h4>Developed complex turbine and casing patterns in CAD, followed by simulation and multi-stage casting. Finished the process with precision CNC machining and industrial painting to achieve production quality.<h4>Key Achievement</h4>Recognized for accuracy and superior structural integration among all projects.</div><div class="technical-sidebar"><div class="tech-item"><h5>Award</h5><p>1st Place, Best Manufacturing</p></div><div class="tech-item"><h5>Focus</h5><p>Accuracy · Integration · Production</p></div></div></div><div class="deep-dive-gallery lightbox-gallery"><div class="gallery-item"><img src="gas-flowmeter-pattern.jpeg" loading="lazy"><p>Pattern Development: 3D modeling turbine & casing.</p></div><div class="gallery-item"><img src="gas-flowmeter-c2.jpeg" loading="lazy"><p>Casting Pattern 1: Preparing casing pattern.</p></div><div class="gallery-item"><img src="gas-flowmeter-ci.jpeg" loading="lazy"><p>Casting Pattern 2: Pattern ready for sand mold.</p></div><div class="gallery-item"><img src="gas-flowmeter-turbine.jpeg" loading="lazy"><p>Turbine & Sand Mold: Cavity for the turbine.</p></div><div class="gallery-item"><img src="gas-flowmeter-manu.jpeg" loading="lazy"><p>Casting Prep: Foundry tools ready for pour.</p></div><div class="gallery-item"><img src="gas-flowmeter-ws.jpeg" loading="lazy"><p>Casting Operation: Molten metal pouring.</p></div><div class="gallery-item"><img src="gas-flowmeter-manu2.jpg" loading="lazy"><p>Post-Casting: Raw turbine component.</p></div><div class="gallery-item"><img src="gas-flowmeter-manu3.jpeg" loading="lazy"><p>Machining Prep: Casing set for CNC facing.</p></div><div class="gallery-item"><img src="gas-flowmeter-manu3.jpg" loading="lazy"><p>Machining: Milling internal surfaces for precise tolerances.</p></div><div class="gallery-item"><img src="gas-flowmeter-manu4.jpeg" loading="lazy"><p>Tapping: Threads for pressure & temperature sensors.</p></div><div class="gallery-item"><img src="gas-flowmeter-manu5.jpeg" loading="lazy"><p>Surface Finish: Sandblasting and priming.</p></div><div class="gallery-item"><img src="gas-flowmeter-manu6.jpeg" loading="lazy"><p>Industrial Painting: Coating to production standards.</p></div><div class="gallery-item"><img src="gas-flowmeter-assem.jpeg" loading="lazy"><p>Initial Assembly: Integrating turbine and casing.</p></div><div class="gallery-item"><img src="gas-flowmeter-assem2.jpeg" loading="lazy"><p>Full Assembly 1: Complete flow meter integration.</p></div><div class="gallery-item"><img src="gas-flowmeter-assem3.jpeg" loading="lazy"><p>Full Assembly 2: Sensor integration enclosure.</p></div><div class="gallery-item"><img src="gas-flowmeter-me-with-meter.jpeg" loading="lazy"><p>Final Product: Validated assembled meter.</p></div><div class="gallery-item"><img src="gas-flowmeter-team-with-doctors.jpeg" loading="lazy"><p>Award Ceremony: Presenting winning design.</p></div></div></div></div>
+
+<div class="modal-overlay" id="modalStirling"><div class="modal-content"><button class="modal-close">&times;</button><h3 class="deep-dive-title">PROJECT DEEP-DIVE: FULL METALLIC STIRLING ENGINE</h3><div class="deep-dive-grid"><div class="deep-dive-main-text"><h4>Overview</h4>Designed and fabricated a full metallic Stirling engine mechanism, focusing on precision manufacturing and system integration. This project was a masterclass in translating advanced mechanical motion from CAD to a physical prototype.<h4>Deeper Technical Insight</h4><strong>1. Design & Mechanism:</strong> Synthesized the complex linkage mechanism using SolidWorks, ensuring precise movement tolerances.<br><strong>2. Material Selection & Machining:</strong> Utilized toughened stainless steel components. Achieved high-tolerance fitment through precision machining, essential for the flawless operation of the piston-displacer system.</div><div class="technical-sidebar"><div class="tech-item"><h5>Focus</h5><p>Mechanism · Precision Mfg</p></div><div class="tech-item"><h5>Materials</h5><p>Toughened Steel</p></div></div></div><div class="deep-dive-gallery lightbox-gallery"><div class="gallery-item"><img src="stirling-team.jpeg" loading="lazy"><p>Team Assembly Collaboration</p></div><div class="gallery-item"><img src="stirling-assem-cad.jpeg" loading="lazy"><p>CAD Mechanism Layout</p></div><div class="gallery-item"><img src="stirling-assem-piston-and-displacer.jpeg" loading="lazy"><p>Precision Piston & Displacer Setup</p></div><div class="gallery-item"><img src="stirling-assem-top.jpeg" loading="lazy"><p>Toughened Steel Assembly Fitment</p></div><div class="gallery-item"><img src="stirling-disassemb.jpeg" loading="lazy"><p>Manufactured Components Breakdown</p></div></div></div></div>
+
+<div class="lightbox-overlay" id="lightbox">
+  <button class="lightbox-close">&times;</button>
+  <img src="" class="lightbox-img" alt="Enlarged view">
 </div>
 
 <script>
-  // Theme
-  const themeToggle = document.getElementById('themeToggle');
-  themeToggle.addEventListener('click', () => { document.body.classList.toggle('light-mode'); themeToggle.textContent = document.body.classList.contains('light-mode') ? '🌙' : '☀️'; });
+  // Clean, fast JS logic
+  const d = document, b = d.body;
+  
+  const tb = d.getElementById('themeToggle');
+  tb.onclick = () => { b.classList.toggle('light-mode'); tb.textContent = b.classList.contains('light-mode') ? '🌙' : '☀️'; };
 
-  // Menu
-  const hamburger = document.getElementById('hamburger');
-  const mobileMenu = document.getElementById('mobileMenu');
-  hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
-  function closeMobile() { mobileMenu.classList.remove('open'); }
+  const menu = d.getElementById('mobileMenu');
+  d.getElementById('hamburger').onclick = () => menu.classList.toggle('open');
+  menu.querySelectorAll('a').forEach(a => a.onclick = () => menu.classList.remove('open'));
 
-  // Scroll
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => { entries.forEach((entry, i) => { if (entry.isIntersecting) { setTimeout(() => entry.target.classList.add('visible'), i * 80); observer.unobserve(entry.target); } }); }, { threshold: 0.1 });
-  reveals.forEach(el => observer.observe(el));
+  const obs = new IntersectionObserver((ents) => { ents.forEach((e, i) => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i * 80); obs.unobserve(e.target); } }); }, { threshold: 0.1 });
+  d.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-  // Modals
-  function openModal(id) { document.getElementById(id).classList.add('open'); document.body.style.overflow = 'hidden'; }
-  function closeModal(id) { document.getElementById(id).classList.remove('open'); document.body.style.overflow = ''; }
+  const openM = id => { d.getElementById(id).classList.add('open'); b.style.overflow = 'hidden'; };
+  const closeM = el => { el.classList.remove('open'); b.style.overflow = ''; };
 
-  document.getElementById('exp1').addEventListener('click', () => openModal('modalExp1'));
-  document.getElementById('exp2').addEventListener('click', () => openModal('modalExp2'));
-  document.getElementById('exp3').addEventListener('click', () => openModal('modalExp3'));
-  document.getElementById('exp4').addEventListener('click', () => openModal('modalExp4'));
-  document.getElementById('exp5').addEventListener('click', () => openModal('modalExp5'));
+  const trigs = { 'exp1':'modalExp1', 'exp2':'modalASURT', 'exp3':'modalExp3', 'exp4':'modalExp4', 'exp5':'modalExp5', 'projFlowMeter':'modalFlowMeter', 'projStirling':'modalStirling' };
+  for (let t in trigs) { let el = d.getElementById(t); if(el) el.onclick = () => openM(trigs[t]); }
 
-  const modals = document.querySelectorAll('.modal-overlay');
-  modals.forEach(modal => { modal.addEventListener('click', function(e) { if (e.target === this) { closeModal(this.id); } }); });
-  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') { const openModals = document.querySelectorAll('.modal-overlay.open'); openModals.forEach(modal => { closeModal(modal.id); }); } });
+  d.querySelectorAll('.modal-overlay').forEach(m => {
+    m.onclick = e => { if (e.target === m) closeM(m); };
+    m.querySelector('.modal-close').onclick = () => closeM(m);
+  });
+
+  const lb = d.getElementById('lightbox'), lbi = lb.querySelector('.lightbox-img');
+  d.querySelectorAll('.lightbox-gallery img').forEach(img => {
+    img.onclick = e => { e.stopPropagation(); lbi.src = img.src; lb.classList.add('open'); };
+  });
+
+  lb.onclick = e => { if (e.target === lb || e.target.classList.contains('lightbox-close')) lb.classList.remove('open'); };
+
+  d.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      if (lb.classList.contains('open')) lb.classList.remove('open');
+      else d.querySelectorAll('.modal-overlay.open').forEach(m => closeM(m));
+    }
+  });
 </script>
 </body>
 </html>
